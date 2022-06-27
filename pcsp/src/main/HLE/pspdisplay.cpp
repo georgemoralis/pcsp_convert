@@ -2,47 +2,25 @@
 * 27/06/2022 - Ported from jpscp 2a9c39b0(16/09/2008)
 * 
 */
+#include "..\PCSPCommon.h"
 #include "pspdisplay.h"
+namespace pspdisplay {
 
-/*TODO*/  // public final class pspdisplay extends GLCanvas implements GLEventListener {
-/*TODO*/  //    private static pspdisplay instance;
-/*TODO*/  //    public static pspdisplay get_instance() {
-/*TODO*/  //        if (instance == null)
-/*TODO*/  //            instance = new pspdisplay();
-/*TODO*/  //        return instance;
-/*TODO*/  //    }
-/*TODO*/  //
-/*TODO*/  //    // PspDisplayPixelFormats enum
-/*TODO*/  //    public static final int PSP_DISPLAY_PIXEL_FORMAT_565  = 0;
-/*TODO*/  //    public static final int PSP_DISPLAY_PIXEL_FORMAT_5551 = 1;
-/*TODO*/  //    public static final int PSP_DISPLAY_PIXEL_FORMAT_4444 = 2;
-/*TODO*/  //    public static final int PSP_DISPLAY_PIXEL_FORMAT_8888 = 3;
-/*TODO*/  //
-/*TODO*/  //    // PspDisplaySetBufSync enum
-/*TODO*/  //    public static final int PSP_DISPLAY_SETBUF_IMMEDIATE = 0;
-/*TODO*/  //    public static final int PSP_DISPLAY_SETBUF_NEXTFRAME = 1;
-/*TODO*/  //
-/*TODO*/  //    // PspDisplayErrorCodes enum
-/*TODO*/  //    public static final int PSP_DISPLAY_ERROR_OK       = 0;
-/*TODO*/  //    public static final int PSP_DISPLAY_ERROR_POINTER  = 0x80000103;
-/*TODO*/  //    public static final int PSP_DISPLAY_ERROR_ARGUMENT = 0x80000107;
-/*TODO*/  //
-/*TODO*/  //    public boolean disableGE;
-/*TODO*/  //
-/*TODO*/  //    // current display mode
-/*TODO*/  //    private int mode;
-/*TODO*/  //    private int width;
-/*TODO*/  //    private int height;
-/*TODO*/  //
-/*TODO*/  //    // current framebuffer settings
-/*TODO*/  //    private int topaddr;
-/*TODO*/  //    private int bufferwidth;
-/*TODO*/  //    private int pixelformat;
-/*TODO*/  //    private int sync;
-/*TODO*/  //
-/*TODO*/  //    // additional variables
-/*TODO*/  //    private int bottomaddr;
-/*TODO*/  //    private boolean refreshRequired;
+    bool disableGE;
+    // current display mode
+    u32 mode;
+    u32 width;
+    u32 height;
+    
+    // current framebuffer settings
+    u32 topaddr;
+    u32 bufferwidth;
+    u32 pixelformat;
+    int sync;
+
+    // additional variables
+    u32 bottomaddr;
+    bool refreshRequired;
 /*TODO*/  //    private long lastUpdate;
 /*TODO*/  //
 /*TODO*/  //    // Canvas fields
@@ -100,28 +78,20 @@
 /*TODO*/  //        }
 /*TODO*/  //    }
 /*TODO*/  //
-/*TODO*/  //    public void write8(int address, int data) {
-/*TODO*/  //        address &= 0x3FFFFFFF;
-/*TODO*/  //        if (address >= topaddr && address < bottomaddr)
-/*TODO*/  //            setDirty(true);
-/*TODO*/  //    }
-/*TODO*/  //
-/*TODO*/  //    public void write16(int address, int data) {
-/*TODO*/  //        address &= 0x3FFFFFFF;
-/*TODO*/  //        if (address >= topaddr && address < bottomaddr)
-/*TODO*/  //            setDirty(true);
-/*TODO*/  //    }
-/*TODO*/  //
-/*TODO*/  //    public void write32(int address, int data) {
-/*TODO*/  //        address &= 0x3FFFFFFF;
-/*TODO*/  //        if (address >= topaddr && address < bottomaddr)
-/*TODO*/  //            setDirty(true);
-/*TODO*/  //    }
-/*TODO*/  //
-/*TODO*/  //    public void setDirty(boolean dirty) {
-/*TODO*/  //        refreshRequired = dirty;
-/*TODO*/  //    }
-/*TODO*/  //
+    void write8(u32 address, u8 data) {
+        address &= 0x3FFFFFFF;
+        if (address >= topaddr && address < bottomaddr) setDirty(true);
+    }
+    void write16(u32 address, u16 data) {
+        address &= 0x3FFFFFFF;
+        if (address >= topaddr && address < bottomaddr) setDirty(true);
+    }
+    void write32(u32 address, u32 data) {
+        address &= 0x3FFFFFFF;
+        if (address >= topaddr && address < bottomaddr) setDirty(true);
+    }
+    void setDirty(bool dirty) { refreshRequired = dirty; }
+
 /*TODO*/  //    private static int getPixelFormatBytes(int pixelformat) {
 /*TODO*/  //        return pixelformat == PSP_DISPLAY_PIXEL_FORMAT_8888 ? 4 : 2;
 /*TODO*/  //    }
@@ -452,3 +422,4 @@
 /*TODO*/  //    }
 /*TODO*/  //}
 /*TODO*/  //
+};        // namespace pspdisplay
