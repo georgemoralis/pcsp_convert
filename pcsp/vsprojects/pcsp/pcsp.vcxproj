@@ -152,7 +152,6 @@
     <ClCompile Include="..\..\src\main\Cpu.cpp" />
     <ClCompile Include="..\..\src\main\main.cpp" />
     <ClCompile Include="..\..\src\main\Memory.cpp" />
-    <ClCompile Include="..\..\src\main\Recompiler.cpp" />
     <ClCompile Include="..\..\src\main\Video.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +161,6 @@
     <ClInclude Include="..\..\src\main\Cpu.h" />
     <ClInclude Include="..\..\src\main\Memory.h" />
     <ClInclude Include="..\..\src\main\PCSPCommon.h" />
-    <ClInclude Include="..\..\src\main\Recompiler.h" />
     <ClInclude Include="..\..\src\main\Singleton.h" />
     <ClInclude Include="..\..\src\main\Video.h" />
   </ItemGroup>

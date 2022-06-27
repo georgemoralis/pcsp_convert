@@ -1,3 +1,7 @@
+27/06/2022
+==========
+-Removed x86 recompiler (we probably do more later)
+
 24/05/2022
 ==========
 -We can now render to glfx window (using old opengl2 code ...) it is not perfect but it works
