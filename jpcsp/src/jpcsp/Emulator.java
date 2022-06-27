@@ -32,11 +32,10 @@ import static jpcsp.util.Utilities.*;
 import jpcsp.filesystems.*;
 
 //import jpcsp.util.Utilities;
-
 public class Emulator implements Runnable {
-public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
+
+    public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
     private static Processor cpu;
-    private static Recompiler rec;
     private static Controller controller;
     private FileManager romManager;
     private boolean mediaImplemented = false;
@@ -50,21 +49,17 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
     public static int[] textsection = new int[2];
     public static int[] initsection = new int[2];
     public static int[] finisection = new int[2];
-    public static int[] Stubtextsection=new int[2];
+    public static int[] Stubtextsection = new int[2];
+
     public Emulator(MainGUI gui) {
         this.gui = gui;
         cpu = new Processor();
 
-        if (Settings.get_instance().readBoolOptions("emuoptions/recompiler"))
-            rec = new Recompiler();
-        else
-            rec = null;
-
         controller = new Controller();
         mainThread = new Thread(this);
     }
-    public void load(SeekableDataInput f)throws IOException
-    {
+
+    public void load(SeekableDataInput f) throws IOException {
         initNewPsp();
         romManager = new FileManager(f);
         initElf32();
@@ -74,6 +69,7 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
             debugger.resetDebugger();
         }
     }
+
     public void load(ByteBuffer f) throws IOException {
         //  here load fileName, iso or etc...
         processLoading(f);
@@ -133,7 +129,7 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
                         shdr.getSh_type() == ShType.REL.getValue()*/) // 0x00000009
                 {
                     Elf32Relocate rel = new Elf32Relocate();
-                    romManager.getActualFile().position((int)(romManager.getElfoffset() + shdr.getSh_offset()));
+                    romManager.getActualFile().position((int) (romManager.getElfoffset() + shdr.getSh_offset()));
 
                     int RelCount = (int) shdr.getSh_size() / Elf32Relocate.sizeof();
                     System.out.println(shdr.getSh_namez() + ": relocating " + RelCount + " entries");
@@ -312,8 +308,7 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
                                     data |= (int)(result & 0x0000FFFF);
                                 }
                                 break;
-                            */
-
+                             */
                             default:
                                 System.out.println("Unhandled relocation type " + R_TYPE + " at " + String.format("%08x", (int) romManager.getBaseoffset() + (int) rel.getR_offset()));
                                 break;
@@ -325,66 +320,58 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
                 }
             }
         }
-        int numberoffailedNIDS=0;
-        int numberofmappedNIDS=0;
+        int numberoffailedNIDS = 0;
+        int numberofmappedNIDS = 0;
         // Imports
         for (Elf32SectionHeader shdr : elf.getListSectionHeader()) {
             if (shdr.getSh_namez().equals(".lib.stub")) {
                 Memory mem = Memory.get_instance();
-                int stubHeadersAddress = (int)(romManager.getBaseoffset() + shdr.getSh_addr());
-                int stubHeadersCount = (int)(shdr.getSh_size() / Elf32StubHeader.sizeof());
+                int stubHeadersAddress = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
+                int stubHeadersCount = (int) (shdr.getSh_size() / Elf32StubHeader.sizeof());
 
                 Elf32StubHeader stubHeader;
                 List<DeferredStub> deferred = new LinkedList<DeferredStub>();
                 NIDMapper nidMapper = NIDMapper.get_instance();
 
                 //System.out.println(shdr.getSh_namez() + ":" + stubsCount + " module entries");
-
-                for (int i = 0; i < stubHeadersCount; i++)
-                {
+                for (int i = 0; i < stubHeadersCount; i++) {
                     stubHeader = new Elf32StubHeader(mem, stubHeadersAddress);
-                    stubHeader.setModuleNamez(readStringZ(mem.mainmemory, (int)(stubHeader.getOffsetModuleName() - MemoryMap.START_RAM)));
+                    stubHeader.setModuleNamez(readStringZ(mem.mainmemory, (int) (stubHeader.getOffsetModuleName() - MemoryMap.START_RAM)));
                     stubHeadersAddress += Elf32StubHeader.sizeof(); //stubHeader.s_size * 4;
                     //System.out.println(stubHeader.toString());
 
-                    for (int j = 0; j < stubHeader.getImports(); j++)
-                    {
-                        int nid = mem.read32((int)(stubHeader.getOffsetNid() + j * 4));
-                        int importAddress = (int)(stubHeader.getOffsetText() + j * 8);
+                    for (int j = 0; j < stubHeader.getImports(); j++) {
+                        int nid = mem.read32((int) (stubHeader.getOffsetNid() + j * 4));
+                        int importAddress = (int) (stubHeader.getOffsetText() + j * 8);
                         int exportAddress;
                         int code;
 
                         // Attempt to fixup stub to point to an already loaded module export
                         exportAddress = nidMapper.moduleNidToAddress(stubHeader.getModuleNamez(), nid);
-                        if (exportAddress != -1)
-                        {
-                            int instruction = // j <jumpAddress>
-                                ((jpcsp.AllegrexOpcodes.J & 0x3f) << 26)
-                                | ((exportAddress >>> 2) & 0x03ffffff);
+                        if (exportAddress != -1) {
+                            int instruction
+                                    = // j <jumpAddress>
+                                    ((jpcsp.AllegrexOpcodes.J & 0x3f) << 26)
+                                    | ((exportAddress >>> 2) & 0x03ffffff);
 
                             mem.write32(importAddress, instruction);
 
                             System.out.println("Mapped NID " + Integer.toHexString(nid) + " to export");
-                        }
-
-                        // Attempt to fixup stub to known syscalls
-                        else
-                        {
+                        } // Attempt to fixup stub to known syscalls
+                        else {
                             code = nidMapper.nidToSyscall(nid);
-                            if (code != -1)
-                            {
+                            if (code != -1) {
                                 // Fixup stub, replacing nop with syscall
-                                int instruction = // syscall <code>
-                                    ((jpcsp.AllegrexOpcodes.SPECIAL & 0x3f) << 26)
-                                    | (jpcsp.AllegrexOpcodes.SYSCALL & 0x3f)
-                                    | ((code & 0x000fffff) << 6);
+                                int instruction
+                                        = // syscall <code>
+                                        ((jpcsp.AllegrexOpcodes.SPECIAL & 0x3f) << 26)
+                                        | (jpcsp.AllegrexOpcodes.SYSCALL & 0x3f)
+                                        | ((code & 0x000fffff) << 6);
 
                                 mem.write32(importAddress + 4, instruction);
                                 numberofmappedNIDS++;
                                 //System.out.println("Mapped NID " + Integer.toHexString(nid) + " to syscall " + Integer.toHexString(code));
-                            }
-                            else
-                            {
+                            } else {
                                 // Save nid for deferred fixup
                                 deferred.add(new DeferredStub(stubHeader.getModuleNamez(), importAddress, nid));
                                 System.out.println("Failed to map NID " + Integer.toHexString(nid) + " (load time)");
@@ -397,25 +384,21 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
                 romManager.addDeferredImports(deferred);
             }
             //the following are used for the instruction counter panel
-            if(shdr.getSh_namez().equals(".text"))
-            {
-                textsection[0] = (int)(romManager.getBaseoffset() + shdr.getSh_addr());
-                textsection[1] = (int)shdr.getSh_size();
+            if (shdr.getSh_namez().equals(".text")) {
+                textsection[0] = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
+                textsection[1] = (int) shdr.getSh_size();
             }
-            if(shdr.getSh_namez().equals(".init"))
-            {
-                initsection[0] = (int)(romManager.getBaseoffset() + shdr.getSh_addr());
-                initsection[1] = (int)shdr.getSh_size();
+            if (shdr.getSh_namez().equals(".init")) {
+                initsection[0] = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
+                initsection[1] = (int) shdr.getSh_size();
             }
-            if(shdr.getSh_namez().equals(".fini"))
-            {
-                finisection[0] = (int)(romManager.getBaseoffset() + shdr.getSh_addr());
-                finisection[1] = (int)shdr.getSh_size();
+            if (shdr.getSh_namez().equals(".fini")) {
+                finisection[0] = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
+                finisection[1] = (int) shdr.getSh_size();
             }
-            if(shdr.getSh_namez().equals(".sceStub.text"))
-            {
-                Stubtextsection[0] = (int)(romManager.getBaseoffset() + shdr.getSh_addr());
-                Stubtextsection[1] = (int)shdr.getSh_size();
+            if (shdr.getSh_namez().equals(".sceStub.text")) {
+                Stubtextsection[0] = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
+                Stubtextsection[1] = (int) shdr.getSh_size();
             }
 
             //test the instruction counter
@@ -435,7 +418,9 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
             System.out.println(jpcsp.Allegrex.Instructions.ADDIU.getCount());*/
         }
         System.out.println(numberofmappedNIDS + " NIDS mapped");
-        if(numberoffailedNIDS>0) System.out.println("Total Failed to map NIDS = " + numberoffailedNIDS);
+        if (numberoffailedNIDS > 0) {
+            System.out.println("Total Failed to map NIDS = " + numberoffailedNIDS);
+        }
     }
 
     private void initCpuBy(Elf32 elf) {
@@ -471,77 +456,74 @@ public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
         Memory.get_instance().NullMemory();
         NIDMapper.get_instance().Initialise();
 
-        if (memview != null)
+        if (memview != null) {
             memview.RefreshMemory();
+        }
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         while (true) {
             try {
-             synchronized(this) {
-                    while (pause)
+                synchronized (this) {
+                    while (pause) {
                         wait();
+                    }
                 }
-            } catch (InterruptedException e){
+            } catch (InterruptedException e) {
             }
 
-            if (rec != null) {
-                rec.run();
-            } else {
-                cpu.step();
-                jpcsp.HLE.ThreadMan.get_instance().step();
-                jpcsp.HLE.pspdisplay.get_instance().step();
-                controller.checkControllerState();
+            cpu.step();
+            jpcsp.HLE.ThreadMan.get_instance().step();
+            jpcsp.HLE.pspdisplay.get_instance().step();
+            controller.checkControllerState();
 
-                if (debugger != null)
-                    debugger.step();
-                //delay(cpu.numberCyclesDelay());
+            if (debugger != null) {
+                debugger.step();
             }
         }
-
     }
-    public synchronized void RunEmu()
-    {
-        if (!mediaImplemented)
-            return;
 
-        if (pause)
-        {
+    public synchronized void RunEmu() {
+        if (!mediaImplemented) {
+            return;
+        }
+
+        if (pause) {
             pause = false;
             notify();
-        }
-        else if (!run)
-        {
+        } else if (!run) {
             run = true;
             mainThread.start();
         }
 
         gui.RefreshButtons();
-        if (debugger != null)
+        if (debugger != null) {
             debugger.RefreshButtons();
+        }
     }
+
     // static so Memory can pause emu on invalid read/write
-    public static synchronized void PauseEmu()
-    {
-        if (run && !pause)
-        {
+    public static synchronized void PauseEmu() {
+        if (run && !pause) {
             pause = true;
 
             gui.RefreshButtons();
 
-            if (debugger != null)
+            if (debugger != null) {
                 debugger.RefreshButtons();
+            }
 
-            if (memview != null)
+            if (memview != null) {
                 memview.RefreshMemory();
+            }
         }
     }
-    public static void setFpsTitle(String fps)
-    {
-         gui.setMainTitle(fps);
+
+    public static void setFpsTitle(String fps) {
+        gui.setMainTitle(fps);
     }
+
     public static Processor getProcessor() {
         return cpu;
     }
