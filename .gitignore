@@ -1,1 +1,5 @@
 /jpcsp/target/*
+/jpcsp/build/
+/jpcsp/nbproject/private/
+/jpcsp/dist/
+/jpcsp/unpacked-pbp/*
