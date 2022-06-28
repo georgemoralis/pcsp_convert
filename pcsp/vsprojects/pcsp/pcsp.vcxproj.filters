@@ -14,6 +14,9 @@
     <ClCompile Include="..\..\src\main\HLE\Managers\SceUidManager.cpp">
       <Filter>HLE\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\main\HLE\pspSysMem.cpp">
+      <Filter>HLE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
@@ -30,6 +33,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\main\HLE\Managers\SceUidManager.h">
       <Filter>HLE\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\main\HLE\pspSysMem.h">
+      <Filter>HLE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
