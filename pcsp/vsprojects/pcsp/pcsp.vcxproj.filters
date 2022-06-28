@@ -8,6 +8,12 @@
     <ClCompile Include="..\..\src\main\HLE\pspdisplay.cpp">
       <Filter>HLE</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\main\HLE\Types\SceUid.cpp">
+      <Filter>HLE\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main\HLE\Managers\SceUidManager.cpp">
+      <Filter>HLE\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
@@ -19,6 +25,12 @@
       <Filter>HLE</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\main\MemoryMap.h" />
+    <ClInclude Include="..\..\src\main\HLE\Types\SceUid.h">
+      <Filter>HLE\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\main\HLE\Managers\SceUidManager.h">
+      <Filter>HLE\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -26,6 +38,12 @@
   <ItemGroup>
     <Filter Include="HLE">
       <UniqueIdentifier>{32d15ab3-2835-4473-b88d-ddde60bfc080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLE\Types">
+      <UniqueIdentifier>{8fbe1a0a-58f3-4b89-9b1e-a9200c9867cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLE\Managers">
+      <UniqueIdentifier>{96cc523b-e748-48bb-b12f-f8bc478c01e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

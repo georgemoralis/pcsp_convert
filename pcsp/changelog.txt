@@ -1,5 +1,6 @@
 28/06/2022
 ==========
+-SceUidManager,SceUid (used it from later versions but it 100% accurate , only small internal changes done in later versions)
 -MemoryMap ported
 -Memory model re-written
 

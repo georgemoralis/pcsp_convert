@@ -150,7 +150,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main\Cpu.cpp" />
+    <ClCompile Include="..\..\src\main\HLE\Managers\SceUidManager.cpp" />
     <ClCompile Include="..\..\src\main\HLE\pspdisplay.cpp" />
+    <ClCompile Include="..\..\src\main\HLE\Types\SceUid.cpp" />
     <ClCompile Include="..\..\src\main\main.cpp" />
     <ClCompile Include="..\..\src\main\Memory.cpp" />
     <ClCompile Include="..\..\src\main\Video.cpp" />
@@ -160,7 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
+    <ClInclude Include="..\..\src\main\HLE\Managers\SceUidManager.h" />
     <ClInclude Include="..\..\src\main\HLE\pspdisplay.h" />
+    <ClInclude Include="..\..\src\main\HLE\Types\SceUid.h" />
     <ClInclude Include="..\..\src\main\Memory.h" />
     <ClInclude Include="..\..\src\main\MemoryMap.h" />
     <ClInclude Include="..\..\src\main\PCSPCommon.h" />

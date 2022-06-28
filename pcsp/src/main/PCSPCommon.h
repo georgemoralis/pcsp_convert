@@ -9,6 +9,8 @@
 #include <tchar.h>
 #include <assert.h>
 #include <exception>
+#include <map>
+#include <string>
 
 typedef __int8  s8;
 typedef __int16 s16;
