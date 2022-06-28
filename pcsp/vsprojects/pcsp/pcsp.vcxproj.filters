@@ -18,6 +18,7 @@
     <ClInclude Include="..\..\src\main\HLE\pspdisplay.h">
       <Filter>HLE</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\main\MemoryMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

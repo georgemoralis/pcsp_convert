@@ -162,6 +162,7 @@
     <ClInclude Include="..\..\src\main\Cpu.h" />
     <ClInclude Include="..\..\src\main\HLE\pspdisplay.h" />
     <ClInclude Include="..\..\src\main\Memory.h" />
+    <ClInclude Include="..\..\src\main\MemoryMap.h" />
     <ClInclude Include="..\..\src\main\PCSPCommon.h" />
     <ClInclude Include="..\..\src\main\Singleton.h" />
     <ClInclude Include="..\..\src\main\Video.h" />

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <tchar.h>
 #include <assert.h>
+#include <exception>
 
 typedef __int8  s8;
 typedef __int16 s16;

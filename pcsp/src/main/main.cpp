@@ -19,11 +19,11 @@ u32 MiniFireCode[] = {
 
 
 int main() {
-    if (!Memory.Initialize()) return false;
+    if (!Memory::initialize()) return false;
     if (!Video.Initialize()) return false;
 
     Cpu.Initialize();
-    for (int i = 0; i < sizeof(MiniFireCode) / 4; ++i) Memory.Write32(i * 4 + 0x08900050, MiniFireCode[i]);
+    for (int i = 0; i < sizeof(MiniFireCode) / 4; ++i) Memory::write32(i * 4 + 0x08900050, MiniFireCode[i]);
 
     for (;;) {
         Cpu.Step();
