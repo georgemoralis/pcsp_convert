@@ -5,6 +5,8 @@
 #include "..\PCSPCommon.h"
 #include "Managers/SceUidManager.h"
 #include "pspSysMem.h"
+#include "..\MemoryMap.h"
+#include "..\Cpu.h"
 
 static std::map<u32, SysMemInfo> blockList;
 static u32 heapTop;
@@ -16,23 +18,18 @@ SysMemInfo::SysMemInfo(u32 partitionid, const std::string &name, u32 type, u32 s
     blockList[uid] = *this;
 }
 
-#if 0
-    public void Initialise(int programStartAddr, int programSize)
-    {
-        blockList = new HashMap<Integer, SysMemInfo>();
+void pspSysMem::Initialise(u32 programStartAddr, u32 programSize) {
+    blockList.clear();
 
-        System.out.println("pspSysMem reserving " + programSize + " bytes at "
-                + String.format("%08x", programStartAddr) + " for app");
+    printf("pspSysMem reserving %d bytes at %08x for app",programSize,programStartAddr);
 
-        heapBottom = programStartAddr + programSize;
-        heapTop = MemoryMap.END_RAM;
-    }
-
-    // Allocates to 64-byte alignment
-    // TODO use the partitionid
-    public int malloc(int partitionid, int type, int size, int addr)
-    {
-        int allocatedAddress = 0;
+    heapBottom = programStartAddr + programSize;
+    heapTop = MemoryMap::END_RAM;
+}
+// Allocates to 64-bit alignment
+//  TODO: use the partitionid
+u32 pspSysMem::malloc(u32 partitionid, u32 type, u32 size, u32 addr) {
+        u32 allocatedAddress = 0;
 
         // TODO check when we are running out of mem!
         if (type == PSP_SMEM_Low)
@@ -67,62 +64,54 @@ SysMemInfo::SysMemInfo(u32 partitionid, const std::string &name, u32 type, u32 s
         }
 
         return allocatedAddress;
-    }
+}
+// For internal use, example: ThreadMan allocating stack space
+// Also removes the associated SysMemInfo (if found) from blockList
+void pspSysMem::free(u32 addr) {
+    bool found = false;
 
-    // For internal use, example: ThreadMan allocating stack space
-    // Also removes the associated SysMemInfo (if found) from blockList
-    public void free(int addr)
-    {
-        boolean found = false;
-
-        // Reverse lookup on blockList, get SysMemInfo and call free
-        for (Iterator<SysMemInfo> it = blockList.values().iterator(); it.hasNext();)
-        {
-            SysMemInfo info = it.next();
-            if (info.addr == addr)
-            {
-                found = true;
-                free(info);
-                it.remove();
-                break;
-            }
-        }
-
-        if (!found)
-        {
-            System.out.println("ERROR failed to map addr to SysMemInfo, possibly bad/missing cleanup or double free in HLE");
+    // reverse lookup on blockList, get SystemInfo and call free
+    for (std::map<u32, SysMemInfo>::iterator it = blockList.begin(); it != blockList.end(); ++it) {
+        if (it->second.addr == addr) {
+            found = true;
+            free(it->second);
+            blockList.erase(it);
+            break;
         }
     }
 
-    public void free(SysMemInfo info)
-    {
+    if (!found) {
+        printf("ERROR failed to map addr to SysMemInfo, possibly bad/missing cleanup or double free in HLE");
+    }
+}
+
+void pspSysMem::free(const SysMemInfo &info) {
         // TODO
-    }
+}
 
-    public void sceKernelMaxFreeMemSize()
-    {
-        int maxFree = heapTop - heapBottom;
-        System.out.println("sceKernelMaxFreeMemSize " + maxFree
-                + " (hex=" + Integer.toHexString(maxFree) + ")");
-        Emulator.getProcessor().gpr[2] = maxFree;
-    }
+void pspSysMem::sceKernelMaxFreeMemSize()
+{
+    u32 maxFree = heapTop - heapBottom;
+    printf("sceKernelMaxFreeMemSize %u (hex= %08X)", maxFree, maxFree);
+    Cpu.gpr[2] = maxFree;
+}
 
-    public void sceKernelTotalFreeMemSize()
-    {
-        int totalFree = heapTop - heapBottom;
-        System.out.println("sceKernelTotalFreeMemSize " + totalFree
-                + " (hex=" + Integer.toHexString(totalFree) + ")");
-        Emulator.getProcessor().gpr[2] = totalFree;
-    }
+void pspSysMem::sceKernelTotalFreeMemSize()
+{
+    u32 totalFree = heapTop - heapBottom;
+    printf("sceKernelTotalFreeMemSize %u (hex= %08X)", totalFree, totalFree);
+    Cpu.gpr[2] = totalFree;
+}
 
-    /**
-     * @param partitionid TODO probably user, kernel etc
-     * 0 = ?
-     * 1 = kernel?
-     * 2 = user?
-     * @param type If type is PSP_SMEM_Addr, then addr specifies the lowest
-     * address allocate the block from.
-     */
+/**
+* @param partitionid TODO probably user, kernel etc
+* 0 = ?
+* 1 = kernel?
+* 2 = user?
+* @param type If type is PSP_SMEM_Addr, then addr specifies the lowest
+* address allocate the block from.
+*/
+#if 0
     public void sceKernelAllocPartitionMemory(int partitionid, int pname, int type, int size, int addr)
     {
         pname &= 0x3fffffff;

@@ -23,8 +23,8 @@
          <y>5</y>
        </registers>
       <logwindow>
-        <x>329</x>
-        <y>585</y>
+        <x>337</x>
+        <y>556</y>
       </logwindow>
     </windowspos>
         
@@ -44,7 +44,7 @@
       <pbpunpack>1</pbpunpack>
       <recompiler>0</recompiler>
       <disablege>0</disablege>
-      <umdbrowser>1</umdbrowser>
+      <umdbrowser>0</umdbrowser>
       <umdpath>umdimages</umdpath>
       <keys>
           <up>38</up>

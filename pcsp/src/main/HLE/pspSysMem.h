@@ -25,4 +25,11 @@ class SysMemInfo {
     u32 addr;
 };
 
-namespace pspSysMem {};
+namespace pspSysMem {
+    void Initialise(u32 programStartAddr, u32 programSize);
+    u32 malloc(u32 partitionid, u32 type, u32 size, u32 addr);
+    void free(u32 addr);
+    void free(const SysMemInfo &info);
+    void sceKernelMaxFreeMemSize();;
+    void sceKernelTotalFreeMemSize();
+};
