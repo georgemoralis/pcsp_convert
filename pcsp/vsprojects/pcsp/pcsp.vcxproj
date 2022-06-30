@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\src\main\Cpu.cpp" />
     <ClCompile Include="..\..\src\main\format\DeferredStub.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32Header.cpp" />
+    <ClCompile Include="..\..\src\main\format\Elf32ProgramHeader.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32Relocate.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32StubHeader.cpp" />
     <ClCompile Include="..\..\src\main\HLE\Managers\SceUidManager.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="..\..\src\main\Cpu.h" />
     <ClInclude Include="..\..\src\main\format\DeferredStub.h" />
     <ClInclude Include="..\..\src\main\format\Elf32Header.h" />
+    <ClInclude Include="..\..\src\main\format\Elf32ProgramHeader.h" />
     <ClInclude Include="..\..\src\main\format\Elf32Relocate.h" />
     <ClInclude Include="..\..\src\main\format\Elf32StubHeader.h" />
     <ClInclude Include="..\..\src\main\HLE\Managers\SceUidManager.h" />
