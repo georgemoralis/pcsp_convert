@@ -3,6 +3,7 @@
 -Added Elf32Header class
 -Added DeferredStub,Elf32Relocate,Elf32StubHeader
 -Added Elf32ProgramHeader
+-Added Elf32SectionHeader
 
 28/06/2022
 ==========

@@ -154,6 +154,7 @@
     <ClCompile Include="..\..\src\main\format\Elf32Header.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32ProgramHeader.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32Relocate.cpp" />
+    <ClCompile Include="..\..\src\main\format\Elf32SectionHeader.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32StubHeader.cpp" />
     <ClCompile Include="..\..\src\main\HLE\Managers\SceUidManager.cpp" />
     <ClCompile Include="..\..\src\main\HLE\pspdisplay.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="..\..\src\main\format\Elf32Header.h" />
     <ClInclude Include="..\..\src\main\format\Elf32ProgramHeader.h" />
     <ClInclude Include="..\..\src\main\format\Elf32Relocate.h" />
+    <ClInclude Include="..\..\src\main\format\Elf32SectionHeader.h" />
     <ClInclude Include="..\..\src\main\format\Elf32StubHeader.h" />
     <ClInclude Include="..\..\src\main\HLE\Managers\SceUidManager.h" />
     <ClInclude Include="..\..\src\main\HLE\pspdisplay.h" />
