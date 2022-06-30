@@ -4,6 +4,7 @@
 -Added DeferredStub,Elf32Relocate,Elf32StubHeader
 -Added Elf32ProgramHeader
 -Added Elf32SectionHeader
+-Added PSPModuleInfo 
 
 28/06/2022
 ==========
