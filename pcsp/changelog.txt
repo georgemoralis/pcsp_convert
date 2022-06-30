@@ -1,3 +1,8 @@
+30/06/2022
+==========
+-Added Elf32Header class
+-Added DeferredStub,Elf32Relocate,Elf32StubHeader
+
 28/06/2022
 ==========
 -Some work on pspSysMem (not completed)

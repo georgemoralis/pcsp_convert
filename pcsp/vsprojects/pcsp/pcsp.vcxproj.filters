@@ -17,6 +17,18 @@
     <ClCompile Include="..\..\src\main\HLE\pspSysMem.cpp">
       <Filter>HLE</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\main\format\Elf32Header.cpp">
+      <Filter>format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main\format\DeferredStub.cpp">
+      <Filter>format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main\format\Elf32Relocate.cpp">
+      <Filter>format</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main\format\Elf32StubHeader.cpp">
+      <Filter>format</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
@@ -37,6 +49,18 @@
     <ClInclude Include="..\..\src\main\HLE\pspSysMem.h">
       <Filter>HLE</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\main\format\Elf32Header.h">
+      <Filter>format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\main\format\DeferredStub.h">
+      <Filter>format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\main\format\Elf32Relocate.h">
+      <Filter>format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\main\format\Elf32StubHeader.h">
+      <Filter>format</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -50,6 +74,9 @@
     </Filter>
     <Filter Include="HLE\Managers">
       <UniqueIdentifier>{96cc523b-e748-48bb-b12f-f8bc478c01e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="format">
+      <UniqueIdentifier>{7f74c690-9933-4c70-bf4a-850cbfd6cc86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

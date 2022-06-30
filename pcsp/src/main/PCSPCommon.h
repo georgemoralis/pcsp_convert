@@ -11,6 +11,8 @@
 #include <exception>
 #include <map>
 #include <string>
+#include <vector>
+#include <fstream>
 
 typedef __int8  s8;
 typedef __int16 s16;
