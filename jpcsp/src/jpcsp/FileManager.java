@@ -22,16 +22,16 @@ import jpcsp.filesystems.*;
 import java.nio.ByteBuffer;
 import java.util.LinkedList;
 import java.util.List;
-import jpcsp.format.DeferredStub;
-import jpcsp.format.Elf32;
-import jpcsp.format.Elf32Header;
-import jpcsp.format.Elf32ProgramHeader;
-import jpcsp.format.Elf32SectionHeader;
-import jpcsp.format.Elf32SectionHeader.ShFlags;
-import jpcsp.format.Elf32SectionHeader.ShType;
-import jpcsp.format.PBP;
-import jpcsp.format.PSP;
-import jpcsp.format.PSPModuleInfo;
+import jpcspd.format.DeferredStub;
+import jpcspd.format.Elf32;
+import jpcspd.format.Elf32Header;
+import jpcspd.format.Elf32ProgramHeader;
+import jpcspd.format.Elf32SectionHeader;
+import jpcspd.format.Elf32SectionHeader.ShFlags;
+import jpcspd.format.Elf32SectionHeader.ShType;
+import jpcspd.format.PBP;
+import jpcspd.format.PSP;
+import jpcspd.format.PSPModuleInfo;
 import jpcsp.util.Utilities;
 
 public class FileManager {

@@ -14,28 +14,28 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
  */
+package jpcspd.format;
 
-package jpcsp.format;
+public class DeferredStub {
+    private String moduleName;
+    private int importAddress;
+    private int nid;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import jpcsp.filesystems.*;
-import static jpcsp.util.Utilities.*;
-/**
- *
- * @author shadow
- */
-public class PSP {  /* format ~PSP */
-    private long e_magic; 
-    
-    private void read(ByteBuffer f) throws IOException {
-        e_magic = readUWord(f);
-    }
-    public PSP(ByteBuffer f) throws IOException {
-        read(f);
+    public DeferredStub(String moduleName, int importAddress, int nid) {
+        this.moduleName = moduleName;
+        this.importAddress = importAddress;
+        this.nid = nid;
     }
 
-     public boolean isValid(){
-        return (Long.toHexString( e_magic & 0xFFFFFFFFL).toUpperCase().equals("5053507E"));//~PSP
-     }
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public int getImportAddress() {
+        return importAddress;
+    }
+
+    public int getNid() {
+        return nid;
+    }
 }

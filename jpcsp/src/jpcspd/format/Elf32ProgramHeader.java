@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
  */
-package jpcsp.format;
+package jpcspd.format;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import jpcsp.filesystems.*;

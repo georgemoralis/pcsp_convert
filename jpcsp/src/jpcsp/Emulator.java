@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.LinkedList;
 import jpcsp.Debugger.MemoryViewer;
 import jpcsp.Debugger.DisassemblerModule.DisassemblerFrame;
-import jpcsp.format.DeferredStub;
-import jpcsp.format.Elf32;
-import jpcsp.format.Elf32Relocate;
-import jpcsp.format.Elf32SectionHeader;
-import jpcsp.format.Elf32SectionHeader.ShType;
-import jpcsp.format.Elf32StubHeader;
+import jpcspd.format.DeferredStub;
+import jpcspd.format.Elf32;
+import jpcspd.format.Elf32Relocate;
+import jpcspd.format.Elf32SectionHeader;
+import jpcspd.format.Elf32SectionHeader.ShType;
+import jpcspd.format.Elf32StubHeader;
 import static jpcsp.util.Utilities.*;
 import jpcsp.filesystems.*;
 

@@ -53,8 +53,8 @@ import javax.swing.table.TableColumn;
 
 import jpcsp.filesystems.umdiso.UmdIsoFile;
 import jpcsp.filesystems.umdiso.UmdIsoReader;
-import jpcsp.format.PBP;
-import jpcsp.format.PSF;
+import jpcspd.format.PBP;
+import jpcspd.format.PSF;
 import jpcsp.util.MetaInformation;
 
 /**

@@ -47,7 +47,7 @@ import jpcsp.HLE.pspiofilemgr;
 import jpcsp.util.JpcspDialogManager;
 import jpcsp.util.MetaInformation;
 import jpcsp.filesystems.umdiso.*;
-import jpcsp.format.PSF;
+import jpcspd.format.PSF;
 
 /**
  *
