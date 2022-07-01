@@ -1,9 +1,13 @@
 Format
 ======
 DeferredStub        |  2a9c39b0(16/09/2008)
+Elf32               |  2a9c39b0(16/09/2008)
 Elf32Header         |  2a9c39b0(16/09/2008)
 Elf32ProgramHeader  |  2a9c39b0(16/09/2008)
 Elf32Relocate       |  2a9c39b0(16/09/2008)
 Elf32SectionHeader  |  2a9c39b0(16/09/2008)
 Elf32StubHeader     |  2a9c39b0(16/09/2008)
+PBP                 |  3c15faa(20/10/2008)
+PSF                 |  74d7b02e(18/10/2008) - Missing logging
+PSP                 |  2a9c39b0(16/09/2008)
 PSPModuleInfo       |  2a9c39b0(16/09/2008)

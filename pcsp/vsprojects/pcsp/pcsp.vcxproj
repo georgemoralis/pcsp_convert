@@ -95,6 +95,8 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OpenGL32.lib;GLU32.lib;../../Output/$(Configuration)/$(Platform)/glew.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -108,6 +110,8 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OpenGL32.lib;GLU32.lib;../../Output/$(Configuration)/$(Platform)/glew.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -123,6 +127,8 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -140,6 +146,8 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -151,11 +159,15 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\main\Cpu.cpp" />
     <ClCompile Include="..\..\src\main\format\DeferredStub.cpp" />
+    <ClCompile Include="..\..\src\main\format\Elf32.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32Header.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32ProgramHeader.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32Relocate.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32SectionHeader.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32StubHeader.cpp" />
+    <ClCompile Include="..\..\src\main\format\PBP.cpp" />
+    <ClCompile Include="..\..\src\main\format\PSF.cpp" />
+    <ClCompile Include="..\..\src\main\format\PSP.cpp" />
     <ClCompile Include="..\..\src\main\format\PSPModuleInfo.cpp" />
     <ClCompile Include="..\..\src\main\HLE\Managers\SceUidManager.cpp" />
     <ClCompile Include="..\..\src\main\HLE\pspdisplay.cpp" />
@@ -171,11 +183,15 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
     <ClInclude Include="..\..\src\main\format\DeferredStub.h" />
+    <ClInclude Include="..\..\src\main\format\Elf32.h" />
     <ClInclude Include="..\..\src\main\format\Elf32Header.h" />
     <ClInclude Include="..\..\src\main\format\Elf32ProgramHeader.h" />
     <ClInclude Include="..\..\src\main\format\Elf32Relocate.h" />
     <ClInclude Include="..\..\src\main\format\Elf32SectionHeader.h" />
     <ClInclude Include="..\..\src\main\format\Elf32StubHeader.h" />
+    <ClInclude Include="..\..\src\main\format\PBP.h" />
+    <ClInclude Include="..\..\src\main\format\PSF.h" />
+    <ClInclude Include="..\..\src\main\format\PSP.h" />
     <ClInclude Include="..\..\src\main\format\PSPModuleInfo.h" />
     <ClInclude Include="..\..\src\main\HLE\Managers\SceUidManager.h" />
     <ClInclude Include="..\..\src\main\HLE\pspdisplay.h" />
