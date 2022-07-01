@@ -4,6 +4,7 @@
 -Added PSP class
 -Added PSF class
 -Added PBP class
+-Some work on emulator and FileManager classes (it appears to load correctly)
 
 30/06/2022
 ==========

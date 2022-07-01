@@ -158,6 +158,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main\Cpu.cpp" />
+    <ClCompile Include="..\..\src\main\Emulator.cpp" />
+    <ClCompile Include="..\..\src\main\FileManager.cpp" />
     <ClCompile Include="..\..\src\main\format\DeferredStub.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32.cpp" />
     <ClCompile Include="..\..\src\main\format\Elf32Header.cpp" />
@@ -182,6 +184,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
+    <ClInclude Include="..\..\src\main\Emulator.h" />
+    <ClInclude Include="..\..\src\main\FileManager.h" />
     <ClInclude Include="..\..\src\main\format\DeferredStub.h" />
     <ClInclude Include="..\..\src\main\format\Elf32.h" />
     <ClInclude Include="..\..\src\main\format\Elf32Header.h" />

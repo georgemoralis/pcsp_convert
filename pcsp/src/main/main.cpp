@@ -2,6 +2,7 @@
 #include "Memory.h"
 #include "Video.h"
 #include "Cpu.h"
+#include "Emulator.h"
 
 u32 MiniFireCode[] = {
     0x27BDF620, 0x03A02021, 0x00082FCC, 0x3C1108A0, 0x3C1208B0, 0x3C104400, 0x00002021, 0x240501E0, 0x24060110,
@@ -23,6 +24,15 @@ int main() {
     if (!Video.Initialize()) return false;
 
     Cpu.Initialize();
+
+    std::string file = "minifire.pbp";
+    std::ifstream ifs;
+    ifs.open(file.c_str(), std::ios::in | std::ios::binary); 
+    if (!ifs.fail()) {
+        Emulator::load(ifs);
+    }
+    
+
     for (int i = 0; i < sizeof(MiniFireCode) / 4; ++i) Memory::write32(i * 4 + 0x08900050, MiniFireCode[i]);
 
     for (;;) {

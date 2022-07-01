@@ -50,6 +50,8 @@
     <ClCompile Include="..\..\src\main\format\PBP.cpp">
       <Filter>format</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\main\Emulator.cpp" />
+    <ClCompile Include="..\..\src\main\FileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
@@ -103,6 +105,8 @@
     <ClInclude Include="..\..\src\main\format\PBP.h">
       <Filter>format</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\main\Emulator.h" />
+    <ClInclude Include="..\..\src\main\FileManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
