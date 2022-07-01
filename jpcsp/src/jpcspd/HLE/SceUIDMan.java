@@ -22,7 +22,7 @@ along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
  * So we can avoid duplicate SceUID and detect when SceUID for one
  * purpose is used for another, example: thread UID used in semaphore.
  */
-package jpcsp.HLE;
+package jpcspd.HLE;
 
 import java.util.HashMap;
 import jpcsp.GeneralJpcspException;

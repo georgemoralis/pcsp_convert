@@ -25,6 +25,7 @@ along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jpcsp.HLE;
 
+import jpcspd.HLE.SceUIDMan;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;

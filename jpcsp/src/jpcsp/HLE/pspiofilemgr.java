@@ -22,6 +22,7 @@ along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
 package jpcsp.HLE;
 
 //import java.io.BufferedOutputStream;
+import jpcspd.HLE.SceUIDMan;
 import jpcsp.filesystems.*;
 import java.io.File;
 import java.io.FileNotFoundException;

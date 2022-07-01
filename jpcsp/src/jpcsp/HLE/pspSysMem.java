@@ -23,6 +23,7 @@ along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jpcsp.HLE;
 
+import jpcspd.HLE.SceUIDMan;
 import java.util.HashMap;
 import java.util.Iterator;
 import jpcsp.Emulator;
