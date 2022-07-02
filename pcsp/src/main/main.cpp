@@ -28,12 +28,14 @@ int main() {
     std::string file = "minifire.pbp";
     std::ifstream ifs;
     ifs.open(file.c_str(), std::ios::in | std::ios::binary); 
+    std::string filepath = std::filesystem::absolute(std::filesystem::path(&file[0])).parent_path().generic_string();
+
     if (!ifs.fail()) {
         Emulator::load(ifs);
     }
     
 
-    for (int i = 0; i < sizeof(MiniFireCode) / 4; ++i) Memory::write32(i * 4 + 0x08900050, MiniFireCode[i]);
+    //for (int i = 0; i < sizeof(MiniFireCode) / 4; ++i) Memory::write32(i * 4 + 0x08900050, MiniFireCode[i]);
 
     for (;;) {
         Cpu.Step();

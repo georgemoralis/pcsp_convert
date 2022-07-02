@@ -1,6 +1,7 @@
 #include "PCSPCommon.h"
 #include "Emulator.h"
 #include "format/PBP.h"
+#include "format/PSPModuleInfo.h"
 #include "FileManager.h"
 /*TODO*/  //    public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
 /*TODO*/  //    private static Processor cpu;

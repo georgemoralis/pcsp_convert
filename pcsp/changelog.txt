@@ -1,3 +1,7 @@
+02/07/2022
+==========
+-More progress to FileManager. It can now load minifire elf into memory and execute it
+
 01/07/2022
 ==========
 -Added Elf32 class
