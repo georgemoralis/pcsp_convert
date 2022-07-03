@@ -23,11 +23,11 @@ Elf32Header &Elf32::getHeader() { return header; }
 
 void Elf32::Elf32setHeader(Elf32Header &header) { this->header = header; }
 
-void Elf32::setListProgramHeader(std::vector<Elf32ProgramHeader> programheaders) {
+void Elf32::setListProgramHeader(std::vector<Elf32ProgramHeader> &programheaders) {
     this->programheaders = programheaders;
 }
 
-void Elf32::setListSectionHeader(std::vector<Elf32SectionHeader> sectionheaders) {
+void Elf32::setListSectionHeader(std::vector<Elf32SectionHeader> &sectionheaders) {
     this->sectionheaders = sectionheaders;
 }
 

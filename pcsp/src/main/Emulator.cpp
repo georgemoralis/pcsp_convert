@@ -1,13 +1,14 @@
 #include "PCSPCommon.h"
-#include "Emulator.h"
 #include "format/PBP.h"
 #include "format/PSPModuleInfo.h"
+#include "format/Elf32.h"
 #include "FileManager.h"
+#include "Emulator.h"
 /*TODO*/  //    public static String ElfInfo, ProgInfo, PbpInfo, SectInfo;
 /*TODO*/  //    private static Processor cpu;
 /*TODO*/  //    private static Controller controller;
 FileManager romManager;
-/*TODO*/  //    private boolean mediaImplemented = false;
+bool mediaImplemented = false;
 /*TODO*/  //    private Thread mainThread;
 /*TODO*/  //    public static boolean run = false;
 /*TODO*/  //    public static boolean pause = false;
@@ -54,45 +55,42 @@ void Emulator::load(std::ifstream &f){
 void Emulator::processLoading(std::ifstream &f) {
     /*TODO*/  //        initNewPsp();
         romManager = FileManager(f);
-/*TODO*/  //
-/*TODO*/  //        switch (romManager.getType()) {
-/*TODO*/  //            case FileManager.FORMAT_ELF:
-/*TODO*/  //                initElf32();//RAM, CPU, GPU...
-/*TODO*/  //                break;
-/*TODO*/  //            case FileManager.FORMAT_ISO:
-/*TODO*/  //                break;
-/*TODO*/  //            case FileManager.FORMAT_PBP:
-/*TODO*/  //                initPbp();//RAM, CPU, GPU...
-/*TODO*/  //                break;
-/*TODO*/  //            case FileManager.FORMAT_UMD:
-/*TODO*/  //                break;
-/*TODO*/  //            case FileManager.FORMAT_PSP:
-/*TODO*/  //                break;
+
+        switch (romManager.getType()) {
+            case FORMAT_ELF:
+                initElf32();//RAM, CPU, GPU...
+                break;
+            case FORMAT_ISO:
+                break;
+            case FORMAT_PBP:
+                initPbp();//RAM, CPU, GPU...
+                break;
+            case FORMAT_UMD:
+                break;
+            case FORMAT_PSP:
+                break;
 /*TODO*/  //            default:
 /*TODO*/  //                throw new IOException("Is not an acceptable format, please choose the rigth file.");
-/*TODO*/  //        }
+        }
 }
-/*TODO*/  //
-/*TODO*/  //    //elf32 initElf32
-/*TODO*/  //    private void initElf32() throws IOException {
-/*TODO*/  //        mediaImplemented = true;
-/*TODO*/  //        initRamBy(romManager.getElf32());
+void Emulator::initElf32(){
+        mediaImplemented = true;
+        initRamBy(romManager.getElf32());
 /*TODO*/  //        initCpuBy(romManager.getElf32());
 /*TODO*/  //        initDebugWindowsByElf32();
-/*TODO*/  //    }
-/*TODO*/  //
-/*TODO*/  //    private void initPbp() throws IOException {
-/*TODO*/  //        mediaImplemented = true;
+   }
+void Emulator::initPbp() {
+        mediaImplemented = true;
 /*TODO*/  //        initRamBy(romManager.getPBP().getElf32());
 /*TODO*/  //        initCpuBy(romManager.getPBP().getElf32());
 /*TODO*/  //        initDebugWindowsByPbp();
 /*TODO*/  //        //RAM, CPU, GPU...
-/*TODO*/  //    }
-/*TODO*/  //
-/*TODO*/  //    private void initRamBy(Elf32 elf) throws IOException {
-/*TODO*/  //        // Relocation
-/*TODO*/  //        if (elf.getHeader().requiresRelocation()) {
-/*TODO*/  //            for (Elf32SectionHeader shdr : elf.getListSectionHeader()) {
+   }
+void Emulator::initRamBy(Elf32 elf) {
+        // Relocation
+        if (elf.getHeader().requiresRelocation()) {
+            assert(0);
+            /*TODO*/  //            for (Elf32SectionHeader shdr : elf.getListSectionHeader()) {
 /*TODO*/  //                if (shdr.getSh_type() == ShType.PRXREL.getValue() /*|| // 0x700000A0
 /*TODO*/  //                        shdr.getSh_type() == ShType.REL.getValue()*/) // 0x00000009
 /*TODO*/  //                {
@@ -305,13 +303,14 @@ void Emulator::processLoading(std::ifstream &f) {
 /*TODO*/  //                    }
 /*TODO*/  //                }
 /*TODO*/  //            }
-/*TODO*/  //        }
-/*TODO*/  //        int numberoffailedNIDS = 0;
-/*TODO*/  //        int numberofmappedNIDS = 0;
-/*TODO*/  //        // Imports
-/*TODO*/  //        for (Elf32SectionHeader shdr : elf.getListSectionHeader()) {
-/*TODO*/  //            if (shdr.getSh_namez().equals(".lib.stub")) {
-/*TODO*/  //                Memory mem = Memory.get_instance();
+        }
+        int numberoffailedNIDS = 0;
+        int numberofmappedNIDS = 0;
+        // Imports
+        for (Elf32SectionHeader shdr : elf.getListSectionHeader()) {
+            if (shdr.getSh_namez().compare(".lib.stub")==0) {
+                assert(0);
+                /*TODO*/  //                Memory mem = Memory.get_instance();
 /*TODO*/  //                int stubHeadersAddress = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
 /*TODO*/  //                int stubHeadersCount = (int) (shdr.getSh_size() / Elf32StubHeader.sizeof());
 /*TODO*/  //
@@ -372,7 +371,7 @@ void Emulator::processLoading(std::ifstream &f) {
 /*TODO*/  //                }
 /*TODO*/  //
 /*TODO*/  //                romManager.addDeferredImports(deferred);
-/*TODO*/  //            }
+            }
 /*TODO*/  //            //the following are used for the instruction counter panel
 /*TODO*/  //            if (shdr.getSh_namez().equals(".text")) {
 /*TODO*/  //                textsection[0] = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
@@ -390,29 +389,12 @@ void Emulator::processLoading(std::ifstream &f) {
 /*TODO*/  //                Stubtextsection[0] = (int) (romManager.getBaseoffset() + shdr.getSh_addr());
 /*TODO*/  //                Stubtextsection[1] = (int) shdr.getSh_size();
 /*TODO*/  //            }
-/*TODO*/  //
-/*TODO*/  //            //test the instruction counter
-/*TODO*/  //            //if (/*shdr.getSh_namez().equals(".text") || */shdr.getSh_namez().equals(".init") /*||
-          //            shdr.getSh_namez().equals(".fini")*/) {
-/*TODO*/  //            /*
-/*TODO*/  //               int sectionAddress = (int)(romManager.getBaseoffset() + shdr.getSh_addr());
-/*TODO*/  //               System.out.println(Integer.toHexString(sectionAddress) + " size = " + shdr.getSh_size());
-/*TODO*/  //               for(int i =0; i< shdr.getSh_size(); i+=4)
-/*TODO*/  //               {
-/*TODO*/  //                 int memread32 = Memory.get_instance().read32(sectionAddress+i);
-/*TODO*/  //                 //System.out.println(memread32);
-/*TODO*/  //                 jpcsp.Allegrex.Decoder.instruction(memread32).increaseCount();
-/*TODO*/  //               }
-/*TODO*/  //
-/*TODO*/  //
-/*TODO*/  //            }
-/*TODO*/  //            System.out.println(jpcsp.Allegrex.Instructions.ADDIU.getCount());*/
-/*TODO*/  //        }
-/*TODO*/  //        System.out.println(numberofmappedNIDS + " NIDS mapped");
-/*TODO*/  //        if (numberoffailedNIDS > 0) {
-/*TODO*/  //            System.out.println("Total Failed to map NIDS = " + numberoffailedNIDS);
-/*TODO*/  //        }
-/*TODO*/  //    }
+        }
+        printf("%d NIDS mapped\n",numberofmappedNIDS);
+        if (numberoffailedNIDS > 0) {
+            printf("Total Failed to map NIDS = %d\n",numberoffailedNIDS);
+        }
+    }
 /*TODO*/  //
 /*TODO*/  //    private void initCpuBy(Elf32 elf) {
 /*TODO*/  //        //set the default values for registers not sure if they are correct and UNTESTED!!

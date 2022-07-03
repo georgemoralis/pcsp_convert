@@ -17,8 +17,8 @@ class Elf32
     Elf32Header &getHeader();
     void Elf32setHeader(Elf32Header &header);
     std::vector<Elf32SectionHeader> &getListSectionHeader();
-    void setListProgramHeader(std::vector<Elf32ProgramHeader> programheaders);
-    void setListSectionHeader(std::vector<Elf32SectionHeader> sectionheaders);
+    void setListProgramHeader(std::vector<Elf32ProgramHeader> &programheaders);
+    void setListSectionHeader(std::vector<Elf32SectionHeader> &sectionheaders);
     void setElfInfo(std::string ElfInfo);
     void setProgInfo(std::string ProgInfo);
     void setSectInfo(std::string SectInfo);

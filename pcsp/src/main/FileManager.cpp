@@ -6,6 +6,7 @@
 #include "format/PBP.h"
 #include "format/PSP.h"
 #include "format/PSPModuleInfo.h"
+#include "format/Elf32.h"
 #include "FileManager.h"
 
 std::string ElfInfo, ProgInfo, PbpInfo, SectInfo;  // TODO : think a better way
@@ -16,11 +17,6 @@ Elf32 elf;
 PSP psp;
 std::ifstream *actualFile;
 std::string filePath;
-int FORMAT_ELF = 0;
-int FORMAT_PBP = 10;
-int FORMAT_UMD = 20;
-int FORMAT_ISO = 30;
-int FORMAT_PSP = 40;
 int type = -1;
 u32 elfoffset = 0;
 u32 baseoffset = 0;
@@ -171,9 +167,8 @@ void FileManager::readElfSectionHeaders() {
 }
 
 Elf32SectionHeader *FileManager::firstStep(Elf32Header ehdr, std::ifstream &f,
-                                           std::vector<Elf32SectionHeader> sectionheaders) {
+                                           std::vector<Elf32SectionHeader> &sectionheaders) {
     /** Read the ELF section headers (1st pass) */
-    getElf32().setListSectionHeader(sectionheaders);  // make the connection
 
     loadAddressLow = ((int)baseoffset > 0x08900000) ? (int)baseoffset : 0x08900000;
     loadAddressHigh = (int)baseoffset;
@@ -225,8 +220,11 @@ Elf32SectionHeader *FileManager::firstStep(Elf32Header ehdr, std::ifstream &f,
     
             //System.out.println("load image low=" + Integer.toHexString(loadAddressLow)
             //            + " high=" + Integer.toHexString(loadAddressHigh) + "");
-//step 2 merged into step1
-                // 2nd pass generate info string for the GUI and get module infos
+    getElf32().setListSectionHeader(sectionheaders);  // make the connection
+                                                      
+    //step 2 merged into step1
+    // 
+    // 2nd pass generate info string for the GUI and get module infos
     // moduleinfo = new PSPModuleInfo(); moved to loadAndDefine()
     int SectionCounter = 0;
     for (Elf32SectionHeader shdr : sectionheaders) {

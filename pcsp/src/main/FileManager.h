@@ -1,4 +1,9 @@
 #pragma once
+
+enum FileFormat {
+    FORMAT_ELF = 0,FORMAT_PBP = 10,FORMAT_UMD = 20,FORMAT_ISO = 30,FORMAT_PSP = 40,
+};
+
 class FileManager 
 {
    public:
@@ -21,5 +26,5 @@ class FileManager
     u32 getLoadAddressHigh();
    private:
     void processPbp();
-    Elf32SectionHeader* firstStep(Elf32Header ehdr, std::ifstream& f, std::vector<Elf32SectionHeader> sectionheaders);
+    Elf32SectionHeader* firstStep(Elf32Header ehdr, std::ifstream& f, std::vector<Elf32SectionHeader> &sectionheaders);
 };

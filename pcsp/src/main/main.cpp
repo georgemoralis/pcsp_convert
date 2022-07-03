@@ -2,6 +2,7 @@
 #include "Memory.h"
 #include "Video.h"
 #include "Cpu.h"
+#include "format/Elf32.h"
 #include "Emulator.h"
 
 u32 MiniFireCode[] = {
