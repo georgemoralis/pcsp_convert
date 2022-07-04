@@ -52,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\main\Emulator.cpp" />
     <ClCompile Include="..\..\src\main\FileManager.cpp" />
+    <ClCompile Include="..\..\src\main\HLE\ThreadMan.cpp">
+      <Filter>HLE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Cpu.h" />
@@ -107,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\main\Emulator.h" />
     <ClInclude Include="..\..\src\main\FileManager.h" />
+    <ClInclude Include="..\..\src\main\HLE\ThreadMan.h">
+      <Filter>HLE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
